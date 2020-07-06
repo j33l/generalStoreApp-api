@@ -24,6 +24,7 @@ Postwoman (https://postwoman.io/) to test the API.
 
 ### User routes
 1. signup user
+```
     url:- localhost:3000/user/signup
     method:- POST
     req. body:- {
@@ -35,8 +36,9 @@ Postwoman (https://postwoman.io/) to test the API.
                     "username": "test2",
                     "__v": 0
                 }
-
+```
 2. login user
+```
     at:- localhost:3000/user/login
     method:- POST
     req. body:- {
@@ -51,6 +53,7 @@ Postwoman (https://postwoman.io/) to test the API.
     res. body(error):-  {
                             "error": "invalid credentials!"
                         }
+```
 
 ## User database model
     {
@@ -71,6 +74,7 @@ Postwoman (https://postwoman.io/) to test the API.
 
 ![vendor-signup image](./readme-meta/vendor-signup.png)
 1. signup vendor
+```
     url:- localhost:3000/vendor/signup
     method:- POST
     req. body:- {
@@ -108,9 +112,11 @@ Postwoman (https://postwoman.io/) to test the API.
                     }],
                     "__v": 0
                 }
+```
 
 ![vendor-login image](./readme-meta/vendor-login.png)
 2. login vendor
+```
     at:- localhost:3000/vendor/login
     method:- POST
     req. body:- {
@@ -122,9 +128,11 @@ Postwoman (https://postwoman.io/) to test the API.
                     "mobile": 1234567890,
                     "__v": 0
                 }
+```
 
 ![vendor-products image](./readme-meta/vendor-products.png)
 3. Products list for the shopkeeper
+```
     at:- localhost:3000/vendor/list
     method:- GET
     req. body:- null
@@ -169,6 +177,7 @@ Postwoman (https://postwoman.io/) to test the API.
                         }
                     ]
                 }
+```
 
 ## Vendor database model
     {
