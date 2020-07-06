@@ -207,3 +207,28 @@ Postwoman (https://postwoman.io/) to test the API.
             }
         }]
     }
+
+# Data flow explanation
+
+1. User Signup / Vendor signup
+- The HTTP request body contains a `username` and `password` data in JSON form.
+- Then the route handler for that request(`/user/signup`) creates a new instance of the "User" model and calls a `save()` method.
+- Mongoose middleware on the "save" event uses `bcrypt.js` library and hashes the plain text password and saves into the database.
+- Then response contains the saved User instence and the overwritten method `toJSON` is called by `Express.js` before sending the
+response.
+- The overwritten `toJSON` removes the `password` field from the response object.
+- Then the response is sent with 201 status code, in case of any errors 400 status code is sent with `error` in response body.
+- In case of "vendor", instead of `username` a `mobile` field is used which stores mobile number.
+- Errors are thrown is `password` length is less than 7 of `username` or `mobile` is already taken by other user.
+
+2. User login / vendor login
+- The HTTP request body contains a `username` (`mobile` for vendor) and `password` data in JSON form.
+- Then the route handler for that request(`user/login`) calls the user defined method `findByCredentials()` on `User` model.
+- That function takes the `username` and `password` and finds the user based on unique `username`.
+- Then the `password` is compared using `bcrypt.js` library method and on sucessful match the user object is returned.
+- And for any errors "invalid credentials" error object is returned. Which is then included with the response back to the user.
+
+3. Products list
+- The HTTP request at `/vendor/list` is to get all items by all vendors registered.
+- The route handler finds all vendors and collects all items data which is then sent to the user with status 200.
+- Any error may response with status code 500.
